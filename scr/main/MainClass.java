@@ -1,6 +1,6 @@
 package main;
 
-import tree.ExpressionTree;
+import pTree.ExpressionTree;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com;
+package comms;
 
 import java.io.BufferedReader;
 import java.io.IOException;
