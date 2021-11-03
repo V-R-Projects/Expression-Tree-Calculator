@@ -8,15 +8,13 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable{
 
-    private final Socket client;
     private final BufferedReader in;
     private final PrintWriter out;
 
     public ClientHandler(Socket clientSocket) throws IOException {
 
-        this.client = clientSocket;
-        in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        out = new PrintWriter(client.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
     }
 
     @Override
