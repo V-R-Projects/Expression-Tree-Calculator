@@ -1,4 +1,4 @@
-package tree;
+package pTree;
 
 import java.util.ArrayList;
 
@@ -36,3 +36,4 @@ public class Node {
     }
 
 }
+

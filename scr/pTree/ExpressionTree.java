@@ -1,4 +1,4 @@
-package tree;
+package pTree;
 
 import java.util.Stack;
 
@@ -185,3 +185,4 @@ public class ExpressionTree {
 
     }
 }
+
