@@ -1,7 +1,6 @@
 package interfaz;
 
-import tree.ExpressionTree;
-import tree.Node;
+import comms.Cliente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,7 +94,8 @@ public class GUI extends JFrame implements KeyListener{
             e.consume();
         }
         else if(e.getKeyChar() == '='){
-            this.activate = true;
+            Cliente client = new Cliente(operation.getText() + "=");
+            operation.setText(client.enviar());
             e.consume();
         }
     }

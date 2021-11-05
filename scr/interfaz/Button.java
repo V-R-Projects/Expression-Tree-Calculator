@@ -1,14 +1,10 @@
 package interfaz;
 
-import tree.ExpressionTree;
-import tree.Node;
+import comms.Cliente;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 
 class Button implements ActionListener {
     JButton button;
@@ -40,7 +36,8 @@ class Button implements ActionListener {
                     this.interfaz.operation.setText(text.substring(0, text.length() - 1));
                 break;
             case "=":
-                this.interfaz.setActivate(true);
+                Cliente client = new Cliente(text + "=");
+                this.interfaz.operation.setText(client.enviar());
                 break;
             case "Consultar":
 
