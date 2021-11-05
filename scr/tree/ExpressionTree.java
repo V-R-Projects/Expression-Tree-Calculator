@@ -1,4 +1,4 @@
-package pTree;
+package tree;
 
 import java.util.Stack;
 
@@ -21,6 +21,31 @@ public class ExpressionTree {
             System.out.print(t.value + " ");
             inorder(t.right);
         }
+    }
+
+    // Evaluates the expression in the tree
+    float Evaluate(Node t){
+        if (isOperand(t.value)){
+            return Float.parseFloat(t.value); // Returns an operand
+        }
+        else { // Makes the operations recursively
+            if (t.value.equals("+")) {
+                return Evaluate(t.left) + Evaluate(t.right);
+            }
+            if (t.value.equals("-")) {
+                return Evaluate(t.left) - Evaluate(t.right);
+            }
+            if (t.value.equals("*")) {
+                return Evaluate(t.left) * Evaluate(t.right);
+            }
+            if (t.value.equals("/")) {
+                return Evaluate(t.left) / Evaluate(t.right);
+            }
+            if (t.value.equals("^")) {
+                return (float) Math.pow(Evaluate(t.left), Evaluate(t.right));
+            }
+        }
+        return 0;
     }
 
     // Utility function to print the tree
@@ -75,7 +100,8 @@ public class ExpressionTree {
     Node constructTreeInfix(String InfixInput) {
         String[] Infix = this.split(InfixInput);
         Stack<Node> st = new Stack<>();
-        Node t, t1, t2;
+        Node t, t1, t2 = null;
+        int temp = 0;
 
         // Traverse through every character of
         // input expression
@@ -98,25 +124,49 @@ public class ExpressionTree {
             else {
                 t = new Node(Infix[i]);
 
-                if(isOperand(st.firstElement().value)){ // first case
+
+                if (t.value.equals("(")){
+                    int skips = 0;
+                    temp = i+1;
+                    i++;
+                    do {
+                        if (Infix[i].equals("(")){
+                            skips++;
+                        }
+                        if (Infix[i].equals(")") && skips > 0){
+                            skips--;
+                        }
+                        i ++;
+                    }while (!Infix[i].equals(")") || skips != 0);
+                    t = constructTreeInfix(InfixInput.substring(temp,i+1));
+
+                }
+
+                else if(isOperand(st.firstElement().value) || (temp == 1 && !t.value.equals("="))){ // first case
                     t1 = st.pop();
                     t.left = t1;
+                    temp = 0;
                 }
                 else {
                     // Pop two top nodes
                     // Store top
                     t1 = st.pop();      // Remove top
-                    t2 = st.peek();
+                    if (st.empty()) {
+                        t = t1;
+                    }
+                    else {
+                        t2 = st.peek();
 
-                    if (priority(t2.value) >= priority(t.value)){
-                        st = merge(st, t1, priority(t.value));
-                        if (!t.value.equals("=") && !t.value.equals(")")) {
-                            t1 = st.pop();
+
+                        if (priority(t2.value) >= priority(t.value)) {
+                            st = merge(st, t1, priority(t.value));
+                            if (!t.value.equals("=") && !t.value.equals(")")) {
+                                t1 = st.pop();
+                                t.left = t1;
+                            }
+                        } else {
                             t.left = t1;
                         }
-                    }
-                    else{
-                        t.left = t1;
                     }
                 }
 
@@ -142,6 +192,7 @@ public class ExpressionTree {
             case "+", "-" -> 0;
             case "*", "/" -> 1;
             case "^" -> 2;
+            case "(" -> 3;
             default -> -1;
         };
     }
@@ -176,12 +227,14 @@ public class ExpressionTree {
         ExpressionTree et = new ExpressionTree();
 //        String postfix = "23+ef*g*-";
 //        Node root = et.constructTreePostfix(postfix);
-        String Infix = "a+b/c^2*25=";
+        String Infix = "(2+4*(2+5))*8=";
         Node root = et.constructTreeInfix(Infix);
         System.out.println("infix expression is");
         et.inorder(root);
         System.out.println("\nTree is:");
         et.toString(root);
+        System.out.println("\nResult is:");
+        System.out.println(et.Evaluate(root));
 
     }
 }

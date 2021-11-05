@@ -1,4 +1,4 @@
-package pTree;
+package tree;
 
 import java.util.ArrayList;
 
