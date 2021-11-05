@@ -2,6 +2,12 @@ package tree;
 
 import java.util.Stack;
 
+/**
+ * Class that creates a expression tree and generates de infix conversion
+ * @author Valesska Blanco@author Ramsés Gutieérrez
+ * @version 1
+ */
+
 public class ExpressionTree {
 
     // A utility function to check if 'c'

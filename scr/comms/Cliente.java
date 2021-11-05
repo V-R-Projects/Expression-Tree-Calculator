@@ -11,6 +11,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+
+/**
+ * Class that generates the clients and send information to the server
+ * @author Valesska Blanco
+ * @author Ramsés Gutiérrez
+ * @version 1
+ */
+
 public class Cliente {
     String msg;
     public Cliente(String msg) {

@@ -6,6 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * Class that optimizes the button creation
+ * @author Valesska Blanco
+ * @author Ramsés Gutiérrez
+ * @version 1
+ */
 class Button implements ActionListener {
     JButton button;
     GUI interfaz;
@@ -36,8 +42,10 @@ class Button implements ActionListener {
                     this.interfaz.operation.setText(text.substring(0, text.length() - 1));
                 break;
             case "=":
-                Cliente client = new Cliente(text + "=");
-                this.interfaz.operation.setText(client.enviar());
+                Cliente client = new Cliente(text + "=#" + Integer.toString(interfaz.id));
+                String[] respuesta = client.enviar().split("#");
+                interfaz.setId(Integer.parseInt(respuesta[1]));
+                interfaz.operation.setText(respuesta[0]);
                 break;
             case "Consultar":
 

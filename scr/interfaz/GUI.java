@@ -7,6 +7,13 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Class that makes the GUI and implements the key functioning
+ * @author Ramsés Gutiérrez
+ * @author Valesska Blanco
+ * @version 1
+ */
+
 public class GUI extends JFrame implements KeyListener{
 
     JPanel panel;
@@ -35,7 +42,7 @@ public class GUI extends JFrame implements KeyListener{
     JTextField result;
     JLabel title;
 
-    public boolean activate = false;
+    public int id = 0;
 
     public GUI(){
 
@@ -84,8 +91,9 @@ public class GUI extends JFrame implements KeyListener{
     public String getData(){
         return this.operation.getText();
     }
-    public void setActivate(boolean activate){
-        this.activate = activate;
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -94,8 +102,10 @@ public class GUI extends JFrame implements KeyListener{
             e.consume();
         }
         else if(e.getKeyChar() == '='){
-            Cliente client = new Cliente(operation.getText() + "=");
-            operation.setText(client.enviar());
+            Cliente client = new Cliente(operation.getText() + "=#" + Integer.toString(id));
+            String[] respuesta = client.enviar().split("#");
+            id = Integer.parseInt(respuesta[1]);
+            operation.setText(respuesta[0]);
             e.consume();
         }
     }

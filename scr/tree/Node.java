@@ -2,9 +2,17 @@ package tree;
 
 import java.util.ArrayList;
 
-public class Node {
-    public String value;
+/**
+ * Class that creates a node for the expression tree
+ * @author Valesska Blanco
+ * @author Ramsés Gutieérrez
+ * @version 1
+ */
+
+public class Node{
+
     public Node left, right;
+    public String value;
 
     Node(String item) {
         value = item;
