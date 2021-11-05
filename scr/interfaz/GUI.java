@@ -36,6 +36,8 @@ public class GUI extends JFrame implements KeyListener{
     JTextField result;
     JLabel title;
 
+    public boolean activate = false;
+
     public GUI(){
 
         this.setTitle("Expression Tree Calculator");
@@ -80,16 +82,20 @@ public class GUI extends JFrame implements KeyListener{
         this.setDefaultCloseOperation(3);
     }
 
+    public String getData(){
+        return this.operation.getText();
+    }
+    public void setActivate(boolean activate){
+        this.activate = activate;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         if (!Character.isDigit(e.getKeyChar()) && !"/*+-^=".contains(Character.toString(e.getKeyChar()))) {
             e.consume();
         }
         else if(e.getKeyChar() == '='){
-            ExpressionTree tree = new ExpressionTree();
-            String Infix = this.operation.getText();
-            Node root = tree.constructTreeInfix(Infix);
-            this.operation.setText(Float.toString(tree.Evaluate(root)));
+            this.activate = true;
             e.consume();
         }
     }

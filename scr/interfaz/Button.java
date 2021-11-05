@@ -42,6 +42,9 @@ class Button implements ActionListener {
             case "=":
                 this.interfaz.setActivate(true);
                 break;
+            case "Consultar":
+
+                break;
             default:
                 this.interfaz.operation.setText(text + this.opText);
                 break;

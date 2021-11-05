@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
+import tree.ExpressionTree;
+import tree.Node;
+
 public class Server {
 
     private static final int puerto = 9090;
@@ -44,6 +48,25 @@ public class Server {
             System.out.println("Connection lost");
         }
 
+    }
+
+    static public String evaluateExpression(String Infix){
+        float result;
+        String output;
+
+        // Creates the Expression Tree
+
+        ExpressionTree tree = new ExpressionTree();
+        Node root = tree.constructTreeInfix(Infix);
+
+        // Evaluates the expression
+
+        result = tree.Evaluate(root);
+
+        // Return the value
+
+        output = Float.toString(result);
+        return output;
     }
 
 
