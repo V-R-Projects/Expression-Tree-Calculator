@@ -31,7 +31,8 @@ public class GUI extends JFrame implements KeyListener{
     Button keyDelLast;
     Button keyParent1;
     Button keyParent2;
-    JTextField operation;
+    Button consult;
+    public JTextField operation;
     JTextField result;
     JLabel title;
 
@@ -39,7 +40,7 @@ public class GUI extends JFrame implements KeyListener{
 
         this.setTitle("Expression Tree Calculator");
         this.setVisible(true);
-        this.setSize(350, 300);
+        this.setSize(350, 400);
 
         this.panel = new JPanel();
         this.getContentPane().add(this.panel);
@@ -73,6 +74,7 @@ public class GUI extends JFrame implements KeyListener{
         this.keyDelLast = new Button(this, "DEL", 250, 110, 20);
         this.keyDelAll = new Button(this, "AC", 250, 160, 20);
         this.keyEq = new Button(this, "=", 250, 210, 20);
+        this.consult = new Button(this, "Consultar",125,260,50);
 
         this.panel.repaint();
         this.setDefaultCloseOperation(3);

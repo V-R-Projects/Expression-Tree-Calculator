@@ -40,10 +40,7 @@ class Button implements ActionListener {
                     this.interfaz.operation.setText(text.substring(0, text.length() - 1));
                 break;
             case "=":
-                ExpressionTree tree = new ExpressionTree();
-                String Infix = text + "=";
-                Node root = tree.constructTreeInfix(Infix);
-                this.interfaz.operation.setText(Float.toString(tree.Evaluate(root)));
+                this.interfaz.setActivate(true);
                 break;
             default:
                 this.interfaz.operation.setText(text + this.opText);
