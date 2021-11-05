@@ -10,7 +10,6 @@ public class MainClass {
     public static GUI frame = new GUI();
 
     public static void main(String[] args) throws IOException {
-        ExpressionTree tree = new ExpressionTree();
 
     }
 }

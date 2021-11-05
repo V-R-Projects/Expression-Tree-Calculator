@@ -7,7 +7,7 @@ public class ExpressionTree {
     // A utility function to check if 'c'
     // is an operator
 
-    boolean isOperand(String c) {
+    private boolean isOperand(String c) {
         return !c.equals("+") && !c.equals("-")
                 && !c.equals("*") && !c.equals("/")
                 && !c.equals("^") && !c.equals("(")
@@ -15,7 +15,7 @@ public class ExpressionTree {
     }
 
     // Utility function to do inorder traversal
-    void inorder(Node t) {
+    public void inorder(Node t) {
         if (t != null) {
             inorder(t.left);
             System.out.print(t.value + " ");
@@ -24,7 +24,7 @@ public class ExpressionTree {
     }
 
     // Evaluates the expression in the tree
-    float Evaluate(Node t){
+    public float Evaluate(Node t){
         if (isOperand(t.value)){
             return Float.parseFloat(t.value); // Returns an operand
         }
@@ -49,14 +49,14 @@ public class ExpressionTree {
     }
 
     // Utility function to print the tree
-    void toString(Node t){
+    public void toString(Node t){
         System.out.println(t.toString());
     }
 
 
     // Returns root of constructed tree for given
     // postfix expression
-    Node constructTreePostfix(String postfixInput) {
+    public Node constructTreePostfix(String postfixInput) {
         String[] postfix = this.split(postfixInput);
         Stack<Node> st = new Stack<>();
         Node t, t1, t2;
@@ -97,7 +97,7 @@ public class ExpressionTree {
         return t;
     }
 
-    Node constructTreeInfix(String InfixInput) {
+    public Node constructTreeInfix(String InfixInput) {
         String[] Infix = this.split(InfixInput);
         Stack<Node> st = new Stack<>();
         Node t, t1, t2 = null;
@@ -222,20 +222,20 @@ public class ExpressionTree {
         return output;
     }
 
-    public static void main(String[] args) {
-
-        ExpressionTree et = new ExpressionTree();
+//    public static void main(String[] args) {
+//
+//        ExpressionTree et = new ExpressionTree();
 //        String postfix = "23+ef*g*-";
 //        Node root = et.constructTreePostfix(postfix);
-        String Infix = "(2+4*(2+5))*8=";
-        Node root = et.constructTreeInfix(Infix);
-        System.out.println("infix expression is");
-        et.inorder(root);
-        System.out.println("\nTree is:");
-        et.toString(root);
-        System.out.println("\nResult is:");
-        System.out.println(et.Evaluate(root));
-
-    }
+//        String Infix = "(2+4*(2+5))*8=";
+//        Node root = et.constructTreeInfix(Infix);
+//        System.out.println("infix expression is");
+//        et.inorder(root);
+//        System.out.println("\nTree is:");
+//        et.toString(root);
+//        System.out.println("\nResult is:");
+//        System.out.println(et.Evaluate(root));
+//
+//    }
 }
 
