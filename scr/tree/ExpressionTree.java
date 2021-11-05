@@ -10,7 +10,7 @@ public class ExpressionTree {
     private boolean isOperand(String c) {
         return !c.equals("+") && !c.equals("-")
                 && !c.equals("*") && !c.equals("/")
-                && !c.equals("^") && !c.equals("(")
+                && !c.equals("%") && !c.equals("(")
                 && !c.equals(")") && !c.equals("=");
     }
 
@@ -41,8 +41,8 @@ public class ExpressionTree {
             if (t.value.equals("/")) {
                 return Evaluate(t.left) / Evaluate(t.right);
             }
-            if (t.value.equals("^")) {
-                return (float) Math.pow(Evaluate(t.left), Evaluate(t.right));
+            if (t.value.equals("%")) {
+                return Evaluate(t.left) % Evaluate(t.right);
             }
         }
         return 0;
@@ -190,8 +190,7 @@ public class ExpressionTree {
     private int priority(String op){
         return switch (op){
             case "+", "-" -> 0;
-            case "*", "/" -> 1;
-            case "^" -> 2;
+            case "*", "/", "%" -> 1;
             case "(" -> 3;
             default -> -1;
         };

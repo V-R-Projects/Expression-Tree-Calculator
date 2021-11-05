@@ -71,7 +71,7 @@ public class GUI extends JFrame implements KeyListener{
         this.keyMin = new Button(this, "-", 190, 110, 0);
         this.keyMult = new Button(this, "*", 190, 160, 0);
         this.keyDiv = new Button(this, "/", 190, 210, 0);
-        this.keyPer = new Button(this, "^", 250, 60, 20);
+        this.keyPer = new Button(this, "%", 250, 60, 20);
         this.keyDelLast = new Button(this, "DEL", 250, 110, 20);
         this.keyDelAll = new Button(this, "AC", 250, 160, 20);
         this.keyEq = new Button(this, "=", 250, 210, 20);
