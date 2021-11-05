@@ -6,15 +6,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import interfaz.GUI;
+
 public class Client {
 
     private static final String ip = "127.0.0.1";
     private static final int puerto = 9090;
-    //public static GUI frame;
 
     public static void main(String[] args) throws IOException {
-
-        //frame = new GUI();
 
         Socket socket = new Socket(ip, puerto);
 
