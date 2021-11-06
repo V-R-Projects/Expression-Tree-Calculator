@@ -12,6 +12,7 @@ public class MainClass {
     static String input = "";
 
     public static void main(String[] args) throws IOException {
+
         while (true) {
             InputStream stream = System.in;
             Scanner scanner = new Scanner(stream);

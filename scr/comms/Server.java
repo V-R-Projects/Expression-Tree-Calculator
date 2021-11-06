@@ -3,11 +3,12 @@ package comms;
 import tree.ExpressionTree;
 import tree.Node;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Class that starts the socket communication and reads the clients information
@@ -18,6 +19,7 @@ import java.net.Socket;
 
 public class Server {
     public static boolean running = true;
+    public static ArrayList<String> register = new ArrayList<>();
 
     /**
      * Creates the expression tree and evaluates the result
@@ -42,6 +44,37 @@ public class Server {
         output = Float.toString(result);
         return output;
     }
+    /**
+     * Generates the server and accepts the clients
+     * @param cliente, expression, result
+     */
+    public static void writeCSV(String cliente, String expression, String result){
+        try{
+            int id = Integer.parseInt(cliente)-1;
+            String path = Paths.get("").toAbsolutePath().normalize().toString();
+
+
+            File csv = new File(path + "/historial/historial_"+cliente+".csv");
+            FileWriter writer = new FileWriter(csv);
+            PrintWriter printer = new PrintWriter(writer);
+
+            Date fecha = new Date();
+
+
+
+            register.set(id, register.get(id) + expression+","+result+","+fecha.toString()+"\n");
+
+            printer.write(register.get(id));
+
+            printer.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * Generates the server and accepts the clients
      * @param args
@@ -71,6 +104,7 @@ public class Server {
                 if (id == 0){
                     clients++;
                     id = clients;
+                    register.add("");
                 }
                 System.out.println("Numero de cliente: " + Integer.toString(id));
 
@@ -78,6 +112,8 @@ public class Server {
                 System.out.println("Expresion a evaluar: " + expresion[0]);
                 String resultado = evaluateExpression(expresion[0]);
                 System.out.println("Resultado: " + resultado);
+
+                writeCSV(Integer.toString(id), expresion[0].substring(0,(expresion[0].length()-1)), resultado);
 
                 out.writeUTF(resultado + "#" + Integer.toString(id));
 
